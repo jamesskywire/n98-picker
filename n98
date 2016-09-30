@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+params=$@;
+mageTwoConfig='composer.json';
+scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
+
+if [ -a 'composer.json' ]
+then
+    echo "Found Magento 2. Running n98-magerun2";
+    if [ -a "$scriptDir/n98-magerun2" ]
+    then
+        eval "$scriptDir/n98-magerun2 $params";
+    else
+        echo "n98-magerun2 not found in $scriptDir/n98-magerun2";
+    fi
+elif [ -a 'htdocs/app/etc/config.xml' ] || [ -a 'app/etc/config.xml']
+then
+    echo "Found Magento 1. Running n98-magerun";
+    if [ -a "$scriptDir/n98-magerun" ]
+    then
+        eval "$scriptDir/n98-magerun $params";
+    else
+        echo "n98-magerun not found in script directory.";
+    fi
+else
+    echo "n98-magerun2 not found in $scriptDir/n98-magerun2";
+fi
