@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 params=$@;
-mageTwoConfig='composer.json';
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 
-if [ -a 'composer.json' ]
+if [ -a 'htdocs/app/etc/env.php' ] || [ -a 'app/etc/env.php' ]
 then
     echo "Found Magento 2. Running n98-magerun2";
     if [ -a "$scriptDir/n98-magerun2.phar" ]
